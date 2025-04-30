@@ -1,0 +1,22 @@
+name: Deploy TXT file to IIS
+
+on:
+  push:
+    branches:
+      - main  # change as needed
+
+jobs:
+  deploy:
+    name: Copy TXT file to IIS
+    runs-on: self-hosted  # make sure your GitHub runner is installed on IIS machine
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Copy TXT file to IIS folder
+        run: |
+          $source = ".\Deplo.txt"
+          $destination = "C:\inetpub\wwwroot\TestSite\Deplo.txt"
+          Copy-Item $source $destination -Force
+        shell: pwsh
