@@ -3,17 +3,19 @@ name: Deploy TXT file to IIS
 on:
   push:
     branches:
-      - main
+      - main  # Adjust this to your target branch if needed
 
 jobs:
   deploy:
     name: Copy TXT file to IIS
-    runs-on: self-hosted
+    runs-on: self-hosted  # Make sure this runner is installed on your IIS machine
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Copy TXT file to IIS folder
+      - name: Copy TXT file to IIS using cmd
+        shell: cmd
         run: |
-          powershell.exe -ExecutionPolicy Bypass -Command "Copy-Item -Path '.\Deplo.txt' -Destination 'C:\inetpub\wwwroot\TestSite\Deplo.txt' -Force"
+          echo Copying file to IIS folder...
+          copy Deplo.txt C:\inetpub\wwwroot\TestSite\Deplo.txt /Y
