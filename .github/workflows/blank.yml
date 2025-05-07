@@ -19,4 +19,4 @@ jobs:
           $source = ".\Deplo.txt"
           $destination = "C:\inetpub\wwwroot\TestSite\Deplo.txt"
           Copy-Item $source $destination -Force
-        shell: pwsh
+        shell: powershell
